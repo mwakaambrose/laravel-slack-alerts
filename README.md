@@ -1,4 +1,4 @@
-# Quickly send a message to Slack | Entendable for building slack bots/apps
+# Quickly send a message to Slack | Extendable for building slack bots/apps
 
 This package can quickly send alerts to Slack. You can use this to notify yourself of any noteworthy events happening in your app.
 
