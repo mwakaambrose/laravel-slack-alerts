@@ -1,4 +1,4 @@
-# Quickly send a message to Slack
+# Quickly send a message to Slack | Entendable for building slack bots/apps
 
 This package can quickly send alerts to Slack. You can use this to notify yourself of any noteworthy events happening in your app.
 
@@ -15,7 +15,7 @@ Under the hood, a job is used to communicate with Slack. This prevents your app 
 You can install the package via composer:
 
 ```bash
-composer require MwakaAmbrose/laravel-slack-alert
+composer require mwakaambrose/laravel-slack-alert
 ```
 
 You can set a `SLACK_ALERT_WEBHOOK` env variable containing a valid Slack webhook URL. You can learn how to get a webhook URL [in the Slack API docs](https://api.slack.com/messaging/webhooks).
