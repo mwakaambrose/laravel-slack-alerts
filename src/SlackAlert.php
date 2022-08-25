@@ -39,17 +39,17 @@ class SlackAlert
 
     public function exception(Throwable $throwable): void
     {
-        $trace = "";
-        for($i = 0; $i < 5; $i++){
-            $traces =  $throwable->getTrace()[$i];
-            if(is_array($traces)){
-                foreach ($traces as $trace_line) {
-                    if(!is_array($trace_line)){
-                        $trace .= "{$trace_line} \n";
-                    }
-                }
-            }
-        }
+        // $trace = "";
+        // for($i = 0; $i < 5; $i++){
+        //     $traces =  $throwable->getTrace()[$i];
+        //     if(is_array($traces)){
+        //         foreach ($traces as $trace_line) {
+        //             if(!is_array($trace_line)){
+        //                 $trace .= "{$trace_line} \n";
+        //             }
+        //         }
+        //     }
+        // }
 
         $msg = new Message(
             ephemeral: true,
@@ -59,7 +59,8 @@ class SlackAlert
                 new Section("On {$throwable->getFile()}"),
                 new Section("At line {$throwable->getLine()}"),
                 new Divider(),
-                Context::fromText($trace),
+                // Context::fromText($trace),
+                Context::fromText("Your Slack Buddy ❤️"),
             ]
         );
         
