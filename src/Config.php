@@ -1,22 +1,27 @@
 <?php
 
-namespace Spatie\SlackAlerts;
+namespace MwakaAmbrose\SlackAlert;
 
-use Spatie\SlackAlerts\Exceptions\JobClassDoesNotExist;
-use Spatie\SlackAlerts\Exceptions\WebhookUrlNotValid;
-use Spatie\SlackAlerts\Jobs\SendToSlackChannelJob;
+use Exception;
+use MwakaAmbrose\SlackAlert\Exceptions\JobClassDoesNotExist;
+use MwakaAmbrose\SlackAlert\Exceptions\WebhookUrlNotValid;
+use MwakaAmbrose\SlackAlert\Jobs\SendToSlackChannelJob;
 
 class Config
 {
     public static function getJob(array $arguments): SendToSlackChannelJob
     {
-        $jobClass = config('slack-alerts.job');
-
-        if (is_null($jobClass) || ! class_exists($jobClass)) {
-            throw JobClassDoesNotExist::make($jobClass);
+        if(!$arguments['channel']){
+            throw new Exception("No channel name provided");
         }
 
-        return app($jobClass, $arguments);
+        $webhookUrl = Config::getWebhookUrl($arguments['channel']);
+
+        if (! $webhookUrl) {
+            throw new Exception("A slack webhook URL is not yet configured");
+        }
+
+        return new SendToSlackChannelJob($arguments, $webhookUrl);
     }
 
     public static function getWebhookUrl(string $name): string|null
@@ -25,7 +30,7 @@ class Config
             return $name;
         }
 
-        $url = config("slack-alerts.webhook_urls.{$name}");
+        $url = config("slack-alert.webhook_urls.{$name}");
 
         if (is_null($url)) {
             return null;

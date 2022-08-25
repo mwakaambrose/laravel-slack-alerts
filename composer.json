@@ -1,29 +1,27 @@
 {
-    "name": "spatie/laravel-slack-alerts",
+    "name": "mwakaambrose/laravel-slack-alert",
     "description": "Send a message to Slack",
     "keywords": [
-        "spatie",
+        "mwaka",
+        "ambrose",
+        "slack",
         "laravel",
-        "laravel-slack-alerts"
+        "laravel-slack-alert"
     ],
-    "homepage": "https://github.com/spatie/laravel-slack-alerts",
+    "homepage": "https://github.com/mwakaambrose/laravel-slack-alert",
     "license": "MIT",
     "authors": [
         {
-            "name": "Niels Vanpachtenbeke",
-            "email": "niels@spatie.be",
-            "role": "Developer"
-        },
-        {
-            "name": "Freek Van der Herten",
-            "email": "freek@spatie.be",
+            "name": "Mwaka Ambrose",
+            "email": "mwakaambrose@gmail.com",
             "role": "Developer"
         }
     ],
     "require": {
         "php": "^8.0",
-        "spatie/laravel-package-tools": "^1.9.2",
-        "illuminate/contracts": "^8.73|^9.0"
+        "illuminate/contracts": "^8.73|^9.0",
+        "slack-php/slack-block-kit": "^2.0",
+        "spatie/laravel-package-tools": "^1.9.2"
     },
     "require-dev": {
         "nunomaduro/collision": "^5.10|^6.0",
@@ -39,13 +37,13 @@
     },
     "autoload": {
         "psr-4": {
-            "Spatie\\SlackAlerts\\": "src",
-            "Spatie\\SlackAlerts\\Database\\Factories\\": "database/factories"
+            "MwakaAmbrose\\SlackAlert\\": "src",
+            "MwakaAmbrose\\SlackAlert\\Database\\Factories\\": "database/factories"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Spatie\\SlackAlerts\\Tests\\": "tests"
+            "MwakaAmbrose\\SlackAlert\\Tests\\": "tests"
         }
     },
     "scripts": {
@@ -63,7 +61,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Spatie\\SlackAlerts\\SlackAlertsServiceProvider"
+                "MwakaAmbrose\\SlackAlert\\SlackAlertsServiceProvider"
             ],
             "aliases": {
                 "Slack": "SlackAlert"

@@ -1,5 +1,5 @@
 <?php
 
-use Spatie\SlackAlerts\Tests\TestCase;
+use MwakaAmbrose\SlackAlert\Tests\TestCase;
 
 uses(TestCase::class)->in(__DIR__);

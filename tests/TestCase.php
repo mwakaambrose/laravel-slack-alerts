@@ -1,9 +1,9 @@
 <?php
 
-namespace Spatie\SlackAlerts\Tests;
+namespace MwakaAmbrose\SlackAlert\Tests;
 
 use Orchestra\Testbench\TestCase as Orchestra;
-use Spatie\SlackAlerts\SlackAlertsServiceProvider;
+use MwakaAmbrose\SlackAlert\SlackAlertsServiceProvider;
 
 class TestCase extends Orchestra
 {

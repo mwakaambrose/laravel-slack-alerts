@@ -8,8 +8,9 @@ use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Support\Facades\Http;
+use Throwable;
 
-class SendToSlackChannelJob implements ShouldQueue
+class SendExceptionToSlackChannelJob implements ShouldQueue
 {
     use Dispatchable;
     use InteractsWithQueue;
@@ -21,14 +22,12 @@ class SendToSlackChannelJob implements ShouldQueue
      */
     public int $maxExceptions = 3;
 
-    public function __construct(
-        public array $payload,
-        public string $webhookUrl
-    ) {}
+    public function __construct(private Throwable $throwable) {}
 
     public function handle(): void
     {
+        $payload = ['type' => $this->type, 'text' => $this->throwable->getMessage()];
 
-        Http::post($this->webhookUrl, $this->payload);
+        Http::post($this->webhookUrl, $payload);
     }
 }
