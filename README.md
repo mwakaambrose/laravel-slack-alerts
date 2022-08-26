@@ -124,23 +124,22 @@ SlackAlert::to("failed_vsla_wallet")->exception(new \Exception("This is a test e
 ```
 ### More advanced
 
-You can pass a callback function the returns an instance of `SlackPhp\Blockkit\Surfaces\Message` to construct your own robust message blocks in slack. See [the packaages home](https://github.com/slack-php/slack-php-block-kit) for more information.
+You can pass a callback function the returns an instance of `SlackPhp\Blockkit\Surfaces\Message` to construct your own robust message blocks in slack. See [the packaages home](https://github.com/slack-php/slack-php-block-kit/tree/1.0.0) for more information.
 
 ```php
 
-SlackAlert::to("failed_vsla_wallet")->send(function(){
-    return new Message(
-        ephemeral: true,
-        blocks: [
-            new Section('Don\'t you just love XKCD?'),
-            new Divider(),
-            new BlockImage(
-                title: 'Team Chat',
-                imageUrl: 'https://imgs.xkcd.com/comics/team_chat.png',
-                altText: 'Comic about the stubbornness of some people switching chat clients',
-            ),
-        ]);
-    });
+SlackAlert::to('failed_vsla_wallet')->send(function(){
+    $msg = Message::new();
+    // Then you can add blocks using the surface's available methods.
+    $msg->text('Don\'t you just love Slack?');
+    $msg->divider();
+    $msg->newImage()
+        ->title('Team Chat')
+        ->url('https://imgs.xkcd.com/comics/team_chat.png')
+        ->altText('Comic about the stubbornness of some people switching chat clients');
+
+    return $msg;
+});
 ```
 
 ## Testing
@@ -150,7 +149,7 @@ composer test
 ```
 
 ## Credits
-- [slack-php/slack-php-block-kit](https://github.com/slack-php/slack-php-block-kit)
+- [slack-php/slack-php-block-kit](https://github.com/slack-php/slack-php-block-kit/tree/1.0.0)
 - [spatie/laravel-slack-alert](https://github.com/spatie/laravel-slack-alert)
 - [Niels Vanpachtenbeke](https://github.com/Nielsvanpach)
 - [Freek Van der Herten](https://github.com/freekmurze)
