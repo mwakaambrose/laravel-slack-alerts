@@ -26,7 +26,7 @@ class SlackAlert
         $webhookUrl = Config::getWebhookUrl($this->webhookUrlName);
 
         if (! $webhookUrl) {
-            throw new Exception("A slack webhook URL is not yet configured");
+            return;
         }
 
         $jobArguments = [
@@ -34,7 +34,10 @@ class SlackAlert
             'type' => 'mrkdown'
         ];
 
-        dispatch(Config::getJob($jobArguments, $webhookUrl));
+        $job = Config::getJob($jobArguments, $webhookUrl);
+        if ($job) {
+            dispatch($job);
+        }
     }
 
     public function exception(Throwable $throwable): void
@@ -54,7 +57,10 @@ class SlackAlert
             "channel" => $this->webhookUrlName,
         ];
 
-        dispatch(Config::getJob($message));
+        $job = Config::getJob($message);
+        if ($job) {
+            dispatch($job);
+        }
     }
 
     public function send(callable $function)
@@ -68,7 +74,10 @@ class SlackAlert
         $message = $message->toArray() + [
             "channel" => $this->webhookUrlName,
         ];
-
-        dispatch(Config::getJob($message));
+        
+        $job = Config::getJob($message);
+        if ($job) {
+            dispatch($job);
+        }
     }
 }

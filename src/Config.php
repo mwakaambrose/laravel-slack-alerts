@@ -9,16 +9,16 @@ use MwakaAmbrose\SlackAlert\Jobs\SendToSlackChannelJob;
 
 class Config
 {
-    public static function getJob(array $arguments): SendToSlackChannelJob
+    public static function getJob(array $arguments)
     {
         if(!$arguments['channel']){
-            throw new Exception("No channel name provided");
+            return;
         }
 
         $webhookUrl = Config::getWebhookUrl($arguments['channel']);
 
-        if (! $webhookUrl) {
-            throw new Exception("A slack webhook URL is not yet configured");
+        if (!$webhookUrl) {
+            return;
         }
 
         return new SendToSlackChannelJob($arguments, $webhookUrl);
