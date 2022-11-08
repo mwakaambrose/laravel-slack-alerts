@@ -11,7 +11,7 @@ class Config
 {
     public static function getJob(array $arguments)
     {
-        if(!$arguments['channel']){
+        if (!array_key_exists('channel', $arguments)) {
             return;
         }
 
